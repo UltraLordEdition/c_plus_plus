@@ -1,0 +1,155 @@
+#include <cmath>
+#include <algorithm>
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main() {
+	/*vector<string> nums = {"One", "Red", "Blue"};
+	sort(begin(nums), end(nums));
+	for (auto x : nums){
+		cout << x << " ";
+	}*/
+
+	/*string word = "babax";
+	sort(begin(word), end(word));
+	cout << word << " " << count(begin(word), end(word), 'a');
+	*/
+	/*int x,y;
+	cin >> x >> y;
+	cout << x+y;*/
+/*
+	int c = 5;
+	int a = c++;
+	int b = ++c;
+	cout << "a = " << a << endl;
+	cout << "b = " << b << endl;
+*/
+	/* сдать задание!!!
+	string x;
+	string a,b,c;
+	cin >> a >> b >>c;
+	x = a;
+	if (x > b){
+		x = b;
+	}
+	if (x > c){
+		x = c;
+	}
+	cout << x;
+	*/
+/*
+	vector<double> K(3);
+	double D, x1, x2;
+	cin >> K[0] >> K [1] >> K[2];
+	if (K[0] == 0 && K[1] != 0){
+		x1 = (-1*K[2]) / (K[1]);
+		cout << x1;
+	} else{
+		D = (K[1]*K[1])-(4*K[0]*K[2]);
+		if ( D == 0 && K[1] != 0){
+		x1 = (-1*K[1]) / (2*K[0]);
+		cout << x1;
+		}
+		if ( D > 0 ){
+			x1 = ((-1*K[1])+(sqrt(D))) / (2*K[0]);
+			x2 = ((-1*K[1])-(sqrt(D))) / (2*K[0]);
+			cout << x1 << " " << x2;
+		}
+	}
+*/
+	/*
+	int a,b;
+	cin >> a >> b;
+	if (b > 0){
+		cout << a/b;
+	} else cout << "Impossible";
+	*/
+/*
+	double N,A,B,X,Y;
+	cin >> N >> A >> B >> X >> Y;
+	if (A < B){
+		if (N > A && N <= B){
+			cout << (N-N*(X/100));
+		} else if (N > B){
+			cout << (N-N*(Y/100));
+		} else if (N <= A){
+			cout << N;
+		}
+	} else if (A == B){
+		cout << "Error - A equal B";
+	} else{
+		cout << "Error - A bolshe B";
+	}
+*/
+	/*
+	int A, B;
+	cin >> A >> B;
+	if (A <= B && A >= 1 && B <= 30000){
+		for (int i = A; i <= B; i++){
+			if (i % 2 == 0){
+				cout << i << " ";
+			}
+		}
+	} else{
+		cout << "Incorrect conditions";
+	}
+*/
+/*
+	string word;
+	cin >> word;
+	int x = 0;
+	for (int i = 0; i <= word.size(); ++i){
+		if ( word[i] == 'f'){
+			x++;
+			if ( x == 2){
+				cout << i;
+				break;
+			}
+		}
+	}
+	if ( x == 1){
+		cout << "-1";
+	} else if ( x == 0){
+		cout << "-2";
+	}
+	*/
+
+	/*int A, B, k = 1, x;
+	cin >> A >> B;
+	if ( A == 0 ){
+		cout << B;
+	} else if ( B == 0 ){
+		cout << A;
+	} else if ( A == B){
+		cout << A;
+	} else if ( A == 1){
+		cout << B;
+	} else if ( B == 1){
+		cout << A;
+	} else{
+			while (A % 2 == 0 && B % 2 == 0 ){
+				A /= 2;
+				B /= 2;
+				k *= 2;
+			}
+			while (A != 0){
+				while ( A % 2 == 0 ){
+					A /= 2;
+				}
+				while ( B % 2 == 0){
+					B /= 2;
+				}
+				if ( A >= B ){
+					A -=B;
+				} else{
+					B -=A;
+				}
+			}
+			cout << B*k;
+	}*/
+	return 0;
+}
+
+
