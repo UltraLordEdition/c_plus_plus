@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <iostream>
 #include <map>
 #include <set>
@@ -95,8 +94,7 @@ public:
 private:
     int fail_count = 0;
 };
-
-
+/*
 class Rational {
     // Вставьте сюда реализацию класса Rational из первой части
 public:
@@ -110,6 +108,10 @@ public:
         // Реализуйте конструктор
         num = numerator;
         dem = denominator;
+        if (denominator == 0)
+        {
+            throw invalid_argument("Invalid argument");
+        }
         if (num<0 && dem<0)
         {
             num *= -1;
@@ -170,10 +172,93 @@ private:
     int dem;
 };
 
-// Вставьте сюда реализацию operator == для класса Rational из второй части
+// Реализуйте для класса Rational операторы ==, + и -
 bool operator==(const Rational& one, const Rational& two)
 {
     return ((one.Numerator() == two.Numerator()) && (one.Denominator() == two.Denominator()));
+}
+
+Rational operator+(const Rational& one, const Rational& two)
+{
+    int ch1 = one.Numerator();
+    int zn1 = one.Denominator();
+    int ch2 = two.Numerator();
+    int zn2 = two.Denominator();
+    int od = zn1 * zn2;
+
+    ch1 = ch1 * zn2;
+    ch2 = ch2 * zn1;
+    Rational r((ch1 + ch2), od);
+
+    return Rational(r.Numerator(), r.Denominator());
+}
+
+Rational operator-(const Rational& one, const Rational& two)
+{
+    int ch1 = one.Numerator();
+    int zn1 = one.Denominator();
+    int ch2 = two.Numerator();
+    int zn2 = two.Denominator();
+    int od = zn1 * zn2;
+
+    ch1 = ch1 * zn2;
+    ch2 = ch2 * zn1;
+    Rational r((ch1 - ch2), od);
+
+    return Rational(r.Numerator(), r.Denominator());
+}
+
+// Реализуйте для класса Rational операторы * и /
+Rational operator*(const Rational& one, const Rational& two)
+{
+    int ch1 = one.Numerator();
+    int zn1 = one.Denominator();
+    int ch2 = two.Numerator();
+    int zn2 = two.Denominator();
+
+    Rational r((ch1*ch2), (zn1*zn2));
+
+    return Rational(r.Numerator(), r.Denominator());
+}
+
+Rational operator/(const Rational& one, const Rational& two)
+{
+    int ch1 = one.Numerator();
+    int zn1 = one.Denominator();
+    int ch2 = two.Numerator();
+    int zn2 = two.Denominator();
+    if (ch2 == 0)
+    {
+        throw domain_error("Division by zero");
+    }
+    Rational r((ch1*zn2), (zn1*ch2));
+
+    return Rational(r.Numerator(), r.Denominator());
+}
+
+// Реализуйте для класса Rational операторы << и >>
+ostream& operator<<(ostream& stream, const Rational& rational)
+{
+    stream << rational.Numerator() << "/" << rational.Denominator();
+    return stream;
+}
+
+istream& operator>>(istream& stream, Rational& rational)
+{
+    int num = 0, den = 1;
+    string line;
+    stream >> line;
+
+    if (!line.empty())
+    {
+        stringstream str;
+        str << line;
+        str >> num;
+        str.ignore(1);
+        str >> den;
+        rational = { num,den };
+    }
+    return stream;
 }
 
 // Реализуйте для класса Rational оператор(ы), необходимые для использования его
@@ -191,9 +276,64 @@ bool operator<(const Rational& lhs, const Rational& rhs)
     }
     return false;
 }
+*/
+void TestConstructor()
+{
+    Rational a;
+    AssertEqual(a.Numerator(), 0,"Numrator has not equal 0");
+    AssertEqual(a.Denominator(), 1, "Denominator has not equal 1");
+}
+
+void TestReduction()
+{
+    const Rational r1(4, 6);
+    AssertEqual(r1.Numerator(), 2, "Numrator has not equal 2");
+    AssertEqual(r1.Denominator(), 3, "Denominator has not equal 3");
+}
+
+void TestNegativ()
+{
+    {
+        const Rational r(-4, 6);
+        AssertEqual(r.Numerator(), -2, "Numrator has not equal -2");
+        AssertEqual(r.Denominator(), 3, "Denominator has not equal 3");
+    }
+    {
+        const Rational r(4, -6);
+        AssertEqual(r.Numerator(), -2, "Numrator has not equal -2");
+        AssertEqual(r.Denominator(), 3, "Denominator has not equal 3");
+    }
+}
+
+void TestPositive()
+{
+    {
+        const Rational r(4, 6);
+        AssertEqual(r.Numerator(), 2, "Numrator has not equal 2");
+        AssertEqual(r.Denominator(), 3, "Denominator has not equal 3");
+    }
+    {
+        const Rational r(-4, -6);
+        AssertEqual(r.Numerator(), 2, "Numrator has not equal 2");
+        AssertEqual(r.Denominator(), 3, "Denominator has not equal 3");
+    }
+}
+
+void TestZero()
+{
+    const Rational r(0, 7);
+    AssertEqual(r.Numerator(), 0, "Numrator has not equal 0");
+    AssertEqual(r.Denominator(), 1, "Denominator has not equal 1");
+}
 
 int main() {
     TestRunner runner;
     // добавьте сюда свои тесты
+    runner.RunTest(TestConstructor, "TestConstructor");
+    runner.RunTest(TestReduction, "TestReduction");
+    runner.RunTest(TestNegativ, "TestNegativ");
+    runner.RunTest(TestPositive, "TestPositive");
+    runner.RunTest(TestZero, "TestZero");
+
     return 0;
 }
