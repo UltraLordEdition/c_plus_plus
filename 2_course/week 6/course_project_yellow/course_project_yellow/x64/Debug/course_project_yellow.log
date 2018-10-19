@@ -1,0 +1,11 @@
+﻿  condition_parser.cpp
+d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\condition_parser.cpp(1): fatal error C1083: Cannot open include file: 'condition_parser.h': No such file or directory
+  condition_parser_test.cpp
+d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\condition_parser_test.cpp(1): fatal error C1083: Cannot open include file: 'condition_parser.h': No such file or directory
+  database.cpp
+d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\database.cpp(1): fatal error C1083: Cannot open include file: 'database.h': No such file or directory
+  main.cpp
+d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\main.cpp(1): fatal error C1083: Cannot open include file: 'database.h': No such file or directory
+  token.cpp
+d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\token.cpp(1): fatal error C1083: Cannot open include file: 'token.h': No such file or directory
+  Generating Code...

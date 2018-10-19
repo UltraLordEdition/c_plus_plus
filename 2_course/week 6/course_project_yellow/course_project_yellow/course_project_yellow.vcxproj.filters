@@ -11,24 +11,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\main.cpp">
+    <ClCompile Include="..\codebase\program\source\main.cpp">
       <Filter>program</Filter>
     </ClCompile>
-    <ClCompile Include="..\condition_parser.cpp">
+    <ClCompile Include="..\codebase\program\source\condition_parser.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\condition_parser_test.cpp">
+    <ClCompile Include="..\codebase\program\source\condition_parser_test.cpp">
       <Filter>base</Filter>
     </ClCompile>
-    <ClCompile Include="..\token.cpp">
+    <ClCompile Include="..\codebase\program\source\token.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\codebase\program\source\database.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\codebase\program\source\date.cpp">
       <Filter>base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\condition_parser.h">
+    <ClInclude Include="..\codebase\program\include\condition_parser.h">
       <Filter>base</Filter>
     </ClInclude>
-    <ClInclude Include="..\token.h">
+    <ClInclude Include="..\codebase\program\include\token.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\codebase\program\include\database.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\codebase\program\include\date.h">
       <Filter>base</Filter>
     </ClInclude>
   </ItemGroup>

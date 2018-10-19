@@ -19,14 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\condition_parser.cpp" />
-    <ClCompile Include="..\condition_parser_test.cpp" />
-    <ClCompile Include="..\main.cpp" />
-    <ClCompile Include="..\token.cpp" />
+    <ClCompile Include="..\codebase\program\source\condition_parser.cpp" />
+    <ClCompile Include="..\codebase\program\source\condition_parser_test.cpp" />
+    <ClCompile Include="..\codebase\program\source\database.cpp" />
+    <ClCompile Include="..\codebase\program\source\date.cpp" />
+    <ClCompile Include="..\codebase\program\source\main.cpp" />
+    <ClCompile Include="..\codebase\program\source\token.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\condition_parser.h" />
-    <ClInclude Include="..\token.h" />
+    <ClInclude Include="..\codebase\program\include\condition_parser.h" />
+    <ClInclude Include="..\codebase\program\include\database.h" />
+    <ClInclude Include="..\codebase\program\include\date.h" />
+    <ClInclude Include="..\codebase\program\include\token.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -108,12 +112,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\include;D:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
