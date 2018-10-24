@@ -9,7 +9,7 @@ void Database::Print(ostream& date_stream) const {
     {
         for (const string& event : item.second)
         {
-            cout << item.first << " " << event << endl;
+            date_stream << item.first << " " << event << endl;
         }
     }
 }

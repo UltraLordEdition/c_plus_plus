@@ -1,6 +1,7 @@
 #pragma once
 
 #include "date.h"
+#include "node.h"
 #include <iostream>
 #include <string>
 #include <set>

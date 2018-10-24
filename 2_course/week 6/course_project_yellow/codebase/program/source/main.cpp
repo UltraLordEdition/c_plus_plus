@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "database.h"
 #include "date.h"
 #include "condition_parser.h"
@@ -10,7 +11,13 @@
 using namespace std;
 
 string ParseEvent(istream& is) {
-  // Реализуйте эту функцию
+    // реализуйте эту функцию
+    while (is.peek() == ' ') {
+        is.ignore(1);
+    }
+    string event;
+    getline(is, event);
+    return event;
 }
 
 void TestAll();
@@ -31,7 +38,7 @@ int main() {
       db.Add(date, event);
     } else if (command == "Print") {
       db.Print(cout);
-    } else if (command == "Del") {
+    } /*else if (command == "Del") {
       auto condition = ParseCondition(is);
       auto predicate = [condition](const Date& date, const string& event) {
         return condition->Evaluate(date, event);
@@ -55,7 +62,7 @@ int main() {
       } catch (invalid_argument&) {
           cout << "No entries" << endl;
       }
-    } else if (command.empty()) {
+    } */else if (command.empty()) {
       continue;
     } else {
       throw logic_error("Unknown command: " + command);
@@ -73,7 +80,7 @@ void TestParseEvent() {
   {
     istringstream is("   sport event ");
     AssertEqual(ParseEvent(is), "sport event ", "Parse event with leading spaces");
-  }
+  }    
   {
     istringstream is("  first event  \n  second event");
     vector<string> events;

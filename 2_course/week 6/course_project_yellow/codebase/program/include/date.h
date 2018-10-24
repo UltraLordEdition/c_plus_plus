@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iomanip>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -25,3 +26,6 @@ Date ParseDate(istringstream& date_stream);
 
 // даты будут по умолчанию выводиться в нужном формате
 ostream& operator<<(ostream& stream, const Date& date);
+
+// определить сравнение для дат необходимо для использования их в качестве ключей словаря
+bool operator<(const Date& lhs, const Date& rhs);

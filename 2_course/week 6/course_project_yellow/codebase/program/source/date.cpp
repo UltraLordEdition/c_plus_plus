@@ -3,22 +3,19 @@
 Date::Date(int new_year, int new_month, int new_day) : year_(new_year), month_(new_month), day_(new_day) {
 }
 
-int Date::GetYear() const
-{
+int Date::GetYear() const {
     return year_;
 }
 
-int Date::GetMonth() const
-{
+int Date::GetMonth() const {
     return month_;
 }
 
-int Date::GetDay() const
-{
+int Date::GetDay() const {
     return day_;
 }
 
-Date ParseDate(stringstream& date_stream) {
+Date ParseDate(istringstream& date_stream) {
     bool ok = true;
 
     int year;
@@ -33,7 +30,8 @@ Date ParseDate(stringstream& date_stream) {
 
     int day;
     ok = ok && (date_stream >> day);
-    ok = ok && date_stream.eof();
+    ok = ok && (~date_stream.eof());
+    date_stream.ignore(1);
 
     if (!ok) {
         throw logic_error("Wrong date format: " + date_stream.str());
@@ -47,4 +45,8 @@ ostream& operator<<(ostream& stream, const Date& date) {
        "-" << setw(2) << setfill('0') << date.GetMonth() <<
        "-" << setw(2) << setfill('0') << date.GetDay();
     return stream;
+}
+
+bool operator<(const Date& lhs, const Date& rhs) {
+    return vector<int>{lhs.GetYear(), lhs.GetMonth(), lhs.GetDay()} < vector<int>{rhs.GetYear(), rhs.GetMonth(), rhs.GetDay()};
 }
