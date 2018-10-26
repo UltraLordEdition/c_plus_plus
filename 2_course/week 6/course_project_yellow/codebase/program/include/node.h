@@ -17,6 +17,7 @@ enum class LogicalOperation {
 };
 
 class Node {
+public:
    virtual bool Evaluate(const Date&, const string& event) const = 0;
 };
 

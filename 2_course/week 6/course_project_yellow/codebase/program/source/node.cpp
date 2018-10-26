@@ -1,7 +1,6 @@
 #include "node.h"
 
 bool EmptyNode::Evaluate(const Date&, const string& event) const {
-
     return true;
 }
 
