@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <string>
 #include <vector>
+#include <tuple>
 
 using namespace std;
 
@@ -29,3 +30,13 @@ ostream& operator<<(ostream& stream, const Date& date);
 
 // определить сравнение для дат необходимо для использования их в качестве ключей словаря
 bool operator<(const Date& lhs, const Date& rhs);
+
+bool operator<=(const Date& lhs, const Date& rhs);
+
+bool operator>(const Date& lhs, const Date& rhs);
+
+bool operator>=(const Date& lhs, const Date& rhs);
+
+bool operator==(const Date& lhs, const Date& rhs);
+
+bool operator!=(const Date& lhs, const Date& rhs);
