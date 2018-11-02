@@ -63,9 +63,6 @@ private:
     const shared_ptr<Node> left_, right_;
  };
 
-//Функция сравнения для Date
+//Шаблонная функция сравнения для Date и событий event
 template <typename LHS, typename RHS>
 bool GetCompression(const Comparison& cmp, const LHS& lhs, const RHS& rhs);
-
-//Функция сравнения для событий event
-//bool GetEvent(const Comparison& cmp, const string& event);

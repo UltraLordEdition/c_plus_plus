@@ -1,47 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="program">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="base">
+    <Filter Include="include">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\codebase\program\source\main.cpp">
-      <Filter>program</Filter>
-    </ClCompile>
     <ClCompile Include="..\codebase\program\source\condition_parser.cpp">
-      <Filter>base</Filter>
+      <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\codebase\program\source\condition_parser_test.cpp">
-      <Filter>base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\codebase\program\source\token.cpp">
-      <Filter>base</Filter>
+      <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\codebase\program\source\database.cpp">
-      <Filter>base</Filter>
+      <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="..\codebase\program\source\date.cpp">
-      <Filter>base</Filter>
+      <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\codebase\program\source\node.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\codebase\program\source\token.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\codebase\program\source\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\codebase\program\include\condition_parser.h">
-      <Filter>base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\codebase\program\include\token.h">
-      <Filter>base</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\codebase\program\include\database.h">
-      <Filter>base</Filter>
+      <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\codebase\program\include\date.h">
-      <Filter>base</Filter>
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\codebase\program\include\node.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\codebase\program\include\test_runner.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\codebase\program\include\token.h">
+      <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

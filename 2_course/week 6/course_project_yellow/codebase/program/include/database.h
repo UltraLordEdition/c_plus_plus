@@ -6,6 +6,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include <functional>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ public:
        
     void Print(ostream& date_stream) const;
     
-    int RemoveIf(shared_ptr<Node>& predicate);
+    int RemoveIf(function<const bool&(const Date&, const string&)> predicate);
     //void FindIf();
     //void Last();
 

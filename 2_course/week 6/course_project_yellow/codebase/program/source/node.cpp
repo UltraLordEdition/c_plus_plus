@@ -51,12 +51,3 @@ bool GetCompression(const Comparison& cmp, const LHS& lhs, const RHS& rhs) {
         return lhs != rhs;
     }
 }
-/*
-bool GetEvent(const Comparison& cmp, const string& lhs, const string& rhs) {
-    switch (cmp) {
-    case Comparison::Equal:
-        return lhs == rhs;
-    case Comparison::NotEqual:
-        return lhs != rhs;
-    }
-}*/

@@ -24,12 +24,15 @@
     <ClCompile Include="..\codebase\program\source\database.cpp" />
     <ClCompile Include="..\codebase\program\source\date.cpp" />
     <ClCompile Include="..\codebase\program\source\main.cpp" />
+    <ClCompile Include="..\codebase\program\source\node.cpp" />
     <ClCompile Include="..\codebase\program\source\token.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\codebase\program\include\condition_parser.h" />
     <ClInclude Include="..\codebase\program\include\database.h" />
     <ClInclude Include="..\codebase\program\include\date.h" />
+    <ClInclude Include="..\codebase\program\include\node.h" />
+    <ClInclude Include="..\codebase\program\include\test_runner.h" />
     <ClInclude Include="..\codebase\program\include\token.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

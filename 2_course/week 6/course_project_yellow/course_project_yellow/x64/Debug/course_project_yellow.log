@@ -1,11 +1,20 @@
-﻿  condition_parser.cpp
-d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\condition_parser.cpp(1): fatal error C1083: Cannot open include file: 'condition_parser.h': No such file or directory
-  condition_parser_test.cpp
-d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\condition_parser_test.cpp(1): fatal error C1083: Cannot open include file: 'condition_parser.h': No such file or directory
+﻿  condition_parser_test.cpp
   database.cpp
-d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\database.cpp(1): fatal error C1083: Cannot open include file: 'database.h': No such file or directory
+d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\database.cpp(22): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
   main.cpp
-d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\main.cpp(1): fatal error C1083: Cannot open include file: 'database.h': No such file or directory
-  token.cpp
-d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\token.cpp(1): fatal error C1083: Cannot open include file: 'token.h': No such file or directory
   Generating Code...
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+  course_project_yellow.vcxproj -> D:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\x64\Debug\course_project_yellow.exe
