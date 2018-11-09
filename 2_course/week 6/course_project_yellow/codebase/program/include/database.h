@@ -18,8 +18,10 @@ public:
     void Print(ostream& date_stream) const;
     
     int RemoveIf(function<const bool&(const Date&, const string&)> predicate);
-    //void FindIf();
-    //void Last();
+    
+    vector<string> FindIf(function<const bool&(const Date&, const string&)> predicate);
+    
+    string Last(const Date& date);
 
 private:
     map<Date, set<string>> storage;

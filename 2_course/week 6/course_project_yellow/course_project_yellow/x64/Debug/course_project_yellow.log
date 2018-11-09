@@ -1,8 +1,31 @@
-﻿  condition_parser_test.cpp
+﻿  condition_parser.cpp
+  condition_parser_test.cpp
   database.cpp
-d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\database.cpp(22): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  date.cpp
+d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\date.cpp(33): warning C4804: '~': unsafe use of type 'bool' in operation
   main.cpp
+  node.cpp
+  token.cpp
   Generating Code...
+d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\node.cpp(53): warning C4715: 'GetCompression<Date,Date>': not all control paths return a value
+d:\soft_projects\coursera_c++\c_plus_plus\2_course\week 6\course_project_yellow\codebase\program\source\node.cpp(53): warning C4715: 'GetCompression<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >': not all control paths return a value
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
 c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
 c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary
 c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\type_traits(16707566): warning C4172: returning address of local variable or temporary

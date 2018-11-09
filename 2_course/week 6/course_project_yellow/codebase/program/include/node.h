@@ -42,8 +42,8 @@ private:
 class EventComparisonNode : public Node {
 public:
     EventComparisonNode(const Comparison& cmp, const string& value);
-
-    bool Evaluate(const Date& date, const string& event) const override;
+     
+    bool Evaluate(const Date& date, const string& event) const override;    
 private:
     const string& GetEvent() const {
         return value_;
@@ -58,7 +58,6 @@ public:
 
     bool Evaluate(const Date& date, const string& event) const override;
 private:
-    //const
     const LogicalOperation logical_operation_;
     const shared_ptr<Node> left_, right_;
  };

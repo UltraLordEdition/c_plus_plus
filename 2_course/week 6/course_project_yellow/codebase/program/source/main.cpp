@@ -45,7 +45,7 @@ int main() {
       };
       int count = db.RemoveIf(predicate);
       cout << "Removed " << count << " entries" << endl;
-    } /*else if (command == "Find") {
+    } else if (command == "Find") {
       auto condition = ParseCondition(is);
       auto predicate = [condition](const Date& date, const string& event) {
         return condition->Evaluate(date, event);
@@ -62,7 +62,7 @@ int main() {
       } catch (invalid_argument&) {
           cout << "No entries" << endl;
       }
-    } */else if (command.empty()) {
+    } else if (command.empty()) {
       continue;
     } else {
       throw logic_error("Unknown command: " + command);
@@ -94,5 +94,7 @@ void TestAll() {
   TestRunner tr;
   tr.RunTest(TestParseEvent, "TestParseEvent");
   tr.RunTest(TestParseCondition, "TestParseCondition");
+  tr.RunTest(TestParsePrint, "TestParsePrint");
   tr.RunTest(TestParseDelete, "TestParseDelete");
+  tr.RunTest(TestParseFind, "TestParseFind");
 }

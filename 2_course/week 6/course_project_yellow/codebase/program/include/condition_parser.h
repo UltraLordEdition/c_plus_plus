@@ -11,6 +11,8 @@ shared_ptr<Node> ParseCondition(istream& is);
 
 void TestParseCondition();
 
+void TestParsePrint();
+
 void TestParseDelete();
 
 void TestParseFind();
