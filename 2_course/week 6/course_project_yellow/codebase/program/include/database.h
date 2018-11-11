@@ -10,8 +10,14 @@
 
 using namespace std;
 
-class Database
-{
+class List {
+public:
+	void AddEvents(const string& event);
+	set<string> list_events;
+	vector<string> last;
+};
+
+class Database {
 public:
     void Add(const Date& date, const string& event);
        
@@ -24,5 +30,5 @@ public:
     string Last(const Date& date);
 
 private:
-    map<Date, set<string>> storage;
+    map<Date, List> storage;
 };

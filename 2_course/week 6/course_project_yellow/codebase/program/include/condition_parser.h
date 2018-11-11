@@ -16,3 +16,5 @@ void TestParsePrint();
 void TestParseDelete();
 
 void TestParseFind();
+
+void TestParseLast();

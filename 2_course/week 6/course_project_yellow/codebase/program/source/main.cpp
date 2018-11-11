@@ -97,4 +97,5 @@ void TestAll() {
   tr.RunTest(TestParsePrint, "TestParsePrint");
   tr.RunTest(TestParseDelete, "TestParseDelete");
   tr.RunTest(TestParseFind, "TestParseFind");
+  tr.RunTest(TestParseLast, "TestParseLast");
 }

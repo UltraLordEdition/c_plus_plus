@@ -590,3 +590,22 @@ void TestParseFind() {
       AssertEqual(entries, expected, "Parse condition 60");
   }
 }
+
+void TestParseLast() {
+  Database db;
+  db.Add({ 2017, 1, 1 }, "New Year");
+  db.Add({ 2017, 3, 8 }, "Holiday");
+  db.Add({ 2017, 1, 1 }, "Holiday");
+  /*{
+	  istringstream is("2016-12-31");
+	  AssertEqual(db.Last(ParseDate(is)), "No entries", "Parse condition 61");
+  }*/
+  {
+	  istringstream is("2017-01-01");
+	  AssertEqual(db.Last(ParseDate(is)), "2017-01-01 Holiday", "Parse condition 62");
+  }
+  {
+	  istringstream is("2017-06-01");
+	  AssertEqual(db.Last(ParseDate(is)), "2017-03-08 Holiday", "Parse condition 63");
+  }
+}
