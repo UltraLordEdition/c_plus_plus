@@ -1,9 +1,52 @@
 #include "database.h"
 #include <algorithm>
 
-void List::AddEvents(const string& events) {
-	list_events.insert(events);
-	last.push_back(events);
+template<typename P>
+void getPrint(const Date& date, const List& list, P& parametr) {
+    for (auto it = begin(list.last); it != end(list.last); ++it) {
+        parametr << date << " " << *it << endl;           
+    }
+}
+
+template<typename P>
+stringstream getFindIf(const Date& date, const List& list, P& parametr) {
+    stringstream str_stream;    
+    for (auto it = begin(list.last); it != end(list.last); ++it) {
+        if(parametr(date, *it) == true) {
+            str_stream << date << " " << *it << endl;            
+        }
+    }
+return str_stream;
+}
+
+template<typename P>
+int getRemoveIf(const Date& date, List& list, P& parametr) {
+    int event_count = 0;
+    for (auto it = begin(list.events); it != end(list.events);) {
+        if (parametr(date, *it) == true) {
+            ++event_count;
+            it = list.events.erase(it);
+        }
+        else {
+            ++it;
+        }
+    }
+    for (auto it_v = begin(list.last); it_v != end(list.last);) {
+        if (parametr(date, *it_v) == true) {
+            it_v = list.last.erase(it_v);
+        }
+        else {
+            ++it_v;
+        }
+    }
+    return event_count;
+}
+
+void List::AddEvents(const string& event) {
+    if (events.count(event) == false) {
+        events.insert(event);
+        last.push_back(event);
+    }
 }
 
 void Database::Add(const Date& date, const string& event) {
@@ -12,25 +55,15 @@ void Database::Add(const Date& date, const string& event) {
 
 void Database::Print(ostream& date_stream) const {
     for (auto it = begin(storage); it != end(storage); ++it) {
-        for (auto it_set = it->second.list_events.begin(); it_set != it->second.list_events.end(); ++it_set) {
-            date_stream << it->first << " " << *it_set << endl;
-        }
+        getPrint(it->first, it->second, date_stream);
     }
 }
 
-int Database::RemoveIf(function<const bool&(const Date&, const string&)> predicate) {
+int Database::RemoveIf(function<bool(const Date&, const string&)> predicate) {
     int event_count = 0;
     for (auto it = begin(storage); it != end(storage);) {
-        for (auto it_set = it->second.list_events.begin(); it_set != it->second.list_events.end();) {
-            if (predicate(it->first, *it_set) == true) {
-                ++event_count;
-                it_set = it->second.list_events.erase(it_set);
-			}
-            else {
-                ++it_set;
-            }
-        }
-        if (it->second.list_events.size() == 0u) {
+        event_count += getRemoveIf(it->first, it->second, predicate);
+        if (it->second.events.size() == 0u) {
             it = storage.erase(it);
 		}
         else {
@@ -40,26 +73,27 @@ int Database::RemoveIf(function<const bool&(const Date&, const string&)> predica
     return event_count;
 }
 
-vector<string> Database::FindIf(function<const bool&(const Date&, const string&)> predicate) {
+vector<string> Database::FindIf(function<bool(const Date&, const string&)> predicate) const {
     string str;
-    stringstream str_stream;
-    vector<string> v;
+    vector<string> v_str;
+    stringstream stream;
     for (auto it = begin(storage); it != end(storage); ++it) {
-        for (auto it_set = it->second.list_events.begin(); it_set != it->second.list_events.end(); ++it_set) {
-            if (predicate(it->first, *it_set) == true) {
-                str_stream << it->first << " " << *it_set << endl;
-                getline(str_stream, str);
-                v.push_back(str);
-            }
+        stream = getFindIf(it->first, it->second, predicate);
+        while (getline(stream, str)) {
+            v_str.push_back(str);
         }
     }
-    return v;
+    return v_str;
 }
 
-string Database::Last(const Date& date) {
+string Database::Last(const Date& date) const {
     stringstream str_stream;
-	auto it = storage.lower_bound(date);
-	//it = prev(it);
-	str_stream << it->first << " " << *storage[it->first].last.rbegin();
-    return str_stream.str();
+	auto it = storage.upper_bound(date);
+    if (it == storage.begin()) {
+        throw invalid_argument("sad");        
+    } else {
+        it = prev(it);
+        str_stream << it->first << " " << *it->second.last.rbegin();
+        return str_stream.str();
+    }    
 }

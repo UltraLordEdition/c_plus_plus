@@ -15,27 +15,19 @@ int Date::GetDay() const {
     return day_;
 }
 
-Date ParseDate(istringstream& date_stream) {
-    bool ok = true;
-
+Date ParseDate(istream& date_stream) {
     int year;
-    ok = ok && (date_stream >> year);
-    ok = ok && (date_stream.peek() == '-');
+    date_stream >> year;
     date_stream.ignore(1);
 
     int month;
-    ok = ok && (date_stream >> month);
-    ok = ok && (date_stream.peek() == '-');
+    date_stream >> month;
     date_stream.ignore(1);
 
     int day;
-    ok = ok && (date_stream >> day);
-    ok = ok && (~date_stream.eof());
+    date_stream >> day;
     date_stream.ignore(1);
-
-    if (!ok) {
-        throw logic_error("Wrong date format: " + date_stream.str());
-    }
+       
     return Date(year, month, day);
 }
 

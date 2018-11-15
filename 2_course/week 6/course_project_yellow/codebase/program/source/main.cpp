@@ -63,7 +63,7 @@ int main() {
           cout << "No entries" << endl;
       }
     } else if (command.empty()) {
-      continue;
+       continue;
     } else {
       throw logic_error("Unknown command: " + command);
     }

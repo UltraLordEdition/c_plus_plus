@@ -50,4 +50,5 @@ bool GetCompression(const Comparison& cmp, const LHS& lhs, const RHS& rhs) {
     case Comparison::NotEqual:
         return lhs != rhs;
     }
+    return false;
 }
