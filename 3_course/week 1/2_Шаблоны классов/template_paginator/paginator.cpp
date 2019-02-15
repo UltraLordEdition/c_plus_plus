@@ -1,4 +1,4 @@
-//#include "test_runner.h"
+#include "test_runner.h"
 
 #include <iterator>
 #include <algorithm>
@@ -41,16 +41,9 @@ public:
     Paginator() = default;
 
     Paginator(Iterator f, Iterator l, size_t p) : first_(f), last_(l), page_size_(p) {
-        auto It = first_;
-        /*for (auto It = begin; It != last_; It = next(It, min(page_size_, distance(It, last_)))) {
-           Page<Iterator> page(It, next(It, min(page_size_, distance(It, last_))));
+        for (auto It = first_; It != last_; It = next(It, min(page_size_, static_cast<size_t>(distance(It, last_)) ))) {
+           Page<Iterator> page(It, next(It, min(page_size_, static_cast<size_t>(distance(It, last_)) )));
            pages.push_back(page);
-        } */
-
-        while (It != last_) {
-            Page<Iterator> page(It, next(It, min(page_size_, distance(It, last_))));
-            It = next(It, min(page_size_, distance(It, last_)));
-            pages.push_back(page);
         }
     }
 
@@ -68,19 +61,16 @@ public:
 
 private:
     const Iterator first_, last_;
-    const int page_size_;
+    size_t page_size_;
     vector<Page<Iterator>> pages;
 };
-
-//Функция нарезки интервала на страницы
-
 
 // Реализуйте этот шаблон функции
 template <typename C>
 auto Paginate(C& c, size_t page_size) {
-    return Paginator(c.begin(), c.end(), page_size);
+    return Paginator{ c.begin(), c.end(), page_size };
 }
-/*
+
 void TestPageCounts() {
     vector<int> v(15);
 
@@ -180,4 +170,3 @@ int main() {
     RUN_TEST(tr, TestConstContainer);
     RUN_TEST(tr, TestPagePagination);
 }
-*/
