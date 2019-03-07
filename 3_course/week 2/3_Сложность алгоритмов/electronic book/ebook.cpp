@@ -1,148 +1,91 @@
-//#include "test_runner.h"
-//#include "profile.h"
-
-#include <algorithm>
-#include <iterator>
 #include <iomanip>
 #include <iostream>
-#include <set>
-#include <utility>
 #include <vector>
+#include <utility>
+#include <map>
 
 using namespace std;
 
 class ReadingManager {
 public:
-    ReadingManager() : pages_(1000) {
-    }
+  ReadingManager()
+        // -1 значит, что не случилось ни одного READ
+      : user_page_counts_(MAX_USER_COUNT_ + 1, -1),
+        page_achieved_by_count_(MAX_PAGE_COUNT_ + 1, 0) {}
 
-    void Read(const int& user_id, const int& page_count) {
-       for (size_t i = 0; i < pages_.size() && i < page_count; i++) {
-           pages_[i].insert(user_id);
-       }
-    }
+  void Read(int user_id, int page_count) {
+    UpdatePageRange(user_page_counts_[user_id] + 1, page_count + 1);
+    user_page_counts_[user_id] = page_count;
+  }
 
-    double Cheer(const int& user_id) const {
-        float result;
-        if (!pages_[0].count(user_id)) {
-            return 0;
-        }
-        if (pages_[0].size() == 1u) {
-            return 1.0;
-        }
-        if (pages_.back().count(user_id)) {
-            return (1.0 / (pages_[0].size() - 1.0)) * (pages_[0].size() - (pages_.back().size()));
-        }
-        for (auto It = begin(pages_); It != pages_.end(); It++) {
-            if (!(*It).count(user_id)) {
-                result = (1.0 / (pages_[0].size() - 1.0)) * (pages_[0].size() - (*prev(It)).size());
-                return result;
-            }
-        }        
+  double Cheer(int user_id) const {
+    const int pages_count = user_page_counts_[user_id];
+    if (pages_count == -1) {
+      return 0;
     }
+    const int user_count = GetUserCount();
+    if (user_count == 1) {
+      return 1;
+    }
+    // По умолчанию деление целочисленное, поэтому
+    // нужно привести числитель к типу double.
+    // Простой способ сделать это — умножить его на 1.0.
+    return (user_count - page_achieved_by_count_[pages_count]) * 1.0
+           / (user_count - 1);
+  }
 
 private:
-    vector<set<int>> pages_;
+  // Статическое поле не принадлежит какому-либо конкретному объекту класса.
+  // По сути это глобальная переменная, в данном случае - константная.
+  // Будь она публичной, к ней можно было бы обратиться снаружи
+  // следующим образом: ReadingManager::MAX_USER_COUNT.
+  static const int MAX_USER_COUNT_ = 100'000;
+  static const int MAX_PAGE_COUNT_ = 1'000;
+
+  // Номер страницы, до которой дочитал пользователь <ключ>
+  vector<int> user_page_counts_;
+  // Количество пользователей, дочитавших (как минимум) до страницы <индекс>
+  vector<int> page_achieved_by_count_;
+
+  int GetUserCount() const {
+    return page_achieved_by_count_[0];
+  }
+
+  // lhs включительно, rhs не включительно
+  void UpdatePageRange(int lhs, int rhs) {
+    for (int i = lhs; i < rhs; ++i) {
+      ++page_achieved_by_count_[i];
+    }
+  }
 };
-/*
-void TestRead() {
-    {
-        ReadingManager manager;
-        vector<set<int>> p = { {1}, { 1 }, { 1 }, { 1 }, { 1 }, { 1 }, { 1 }, { 1 }, { 1 }, { 1 } };
-        manager.Read(1, 10);
-        ASSERT_EQUAL(manager.pages_, p);
-    }
-    {
-        ReadingManager manager;
-        vector<set<int>> p = { {1,2,3}, { 1,2,3 }, { 1,2,3 }, { 1,2,3 }, { 1,2,3 }, { 1,3 }, { 1,3 }, { 1 }, { 1 }, { 1 } };
-        manager.Read(1, 10);
-        manager.Read(2, 5);
-        manager.Read(3, 7);
-        ASSERT_EQUAL(manager.pages_, p);
-    }
-    {
-        ReadingManager manager;
-        vector<set<int>> p = { {1,2,3}, { 1,2,3 }, { 1,2,3 }, { 1,2,3 }, { 1,2,3 }, { 1,3 }, { 1,3 }, { 1,3 }, { 1,3 }, { 1,3 } };
-        manager.Read(1, 10);
-        manager.Read(2, 5);
-        manager.Read(3, 7);
-        manager.Read(3, 10);
-        ASSERT_EQUAL(manager.pages_, p);
-    }
-}
 
-void TestCheer() {
-    {
-        ReadingManager manager;
-        vector<set<int>> p = { {1}, { 1 }, { 1 }, { 1 }, { 1 }, { 1 }, { 1 }, { 1 }, { 1 }, { 1 }, { 1 } };
-        manager.Read(1, 11);
-        ASSERT_EQUAL(manager.Cheer(1), 1);
-    }
-    {
-        ReadingManager manager;
-        vector<set<int>> p = { {1,2,3,4,5,6}, { 1,2,3,4,5,6 }, { 1,2,3,4,5,6 }, { 1,2,3,4,6 }, { 1,2,3,4,6 }, { 1,3,4,6 }, { 1,3 }, { 1,3 }, { 1,3 }, { 1,3 }, { 3 } };
-        manager.Read(1, 10);
-        manager.Read(2, 5);
-        manager.Read(3, 11);
-        manager.Read(4, 6);
-        manager.Read(5, 3);
-        manager.Read(6, 7);
-        ASSERT_EQUAL(manager.Cheer(1), 0.8);
-        ASSERT_EQUAL(manager.Cheer(2), 0.2);
-        ASSERT_EQUAL(manager.Cheer(3), 1.0);
-        ASSERT_EQUAL(manager.Cheer(4), 0.4);
-        ASSERT_EQUAL(manager.Cheer(5), 0);
-        ASSERT_EQUAL(manager.Cheer(6), 0.6);
-    }
-    {
-        ReadingManager manager;
-        vector<set<int>> p = { {1,2,3}, { 1,2,3 }, { 1,2,3 }, { 1,2,3 }, { 1,2,3 }, { 1,3 }, { 1,3 }, { 1,3 }, { 1,3 }, { 1,3 }, { 1,3 } };
-        ASSERT_EQUAL(manager.Cheer(5), 0);
-        manager.Read(1, 11);
-        ASSERT_EQUAL(manager.Cheer(1), 1);
-        manager.Read(2, 5);
-        manager.Read(3, 8);
-        ASSERT_EQUAL(manager.Cheer(2), 0);
-        ASSERT_EQUAL(manager.Cheer(3), 0.5);
-        manager.Read(3, 11);
-        ASSERT_EQUAL(manager.Cheer(3), 0.5);
-    }
-}
 
-void TestAll() {
-    TestRunner tr;
-    RUN_TEST(tr, TestRead);
-    RUN_TEST(tr, TestCheer);
-}
-*/
 int main() {
-    //TestAll();
-    // Для ускорения чтения данных отключается синхронизация
-    // cin и cout с stdio,
-    // а также выполняется отвязка cin от cout
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+  // Для ускорения чтения данных отключается синхронизация
+  // cin и cout с stdio,
+  // а также выполняется отвязка cin от cout
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
 
-    ReadingManager manager;
+  ReadingManager manager;
 
-    int query_count;
-    cin >> query_count;
+  int query_count;
+  cin >> query_count;
 
-    for (int query_id = 0; query_id < query_count; ++query_id) {
-        string query_type;
-        cin >> query_type;
-        int user_id;
-        cin >> user_id;
+  for (int query_id = 0; query_id < query_count; ++query_id) {
+    string query_type;
+    cin >> query_type;
+    int user_id;
+    cin >> user_id;
 
-        if (query_type == "READ") {
-            int page_count;
-            cin >> page_count;
-            manager.Read(user_id, page_count);
-        }
-        else if (query_type == "CHEER") {
-            cout << setprecision(6) << manager.Cheer(user_id) << endl;
-        }
+    if (query_type == "READ") {
+      int page_count;
+      cin >> page_count;
+      manager.Read(user_id, page_count);
+    } else if (query_type == "CHEER") {
+      cout << setprecision(6) << manager.Cheer(user_id) << "\n";
     }
+  }
 
-    return 0;
+  return 0;
 }
