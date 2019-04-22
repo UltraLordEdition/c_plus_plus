@@ -6,7 +6,6 @@
 #include <iostream>
 #include <random>
 #include <vector>
-#include <set>
 
 using namespace std;
 
@@ -16,53 +15,58 @@ class AirportCounter {
 public:
   // конструктор по умолчанию: список элементов пока пуст
   AirportCounter() {
-    for (size_t i = 0; i < base_.size(); ++i) {
-      base_[i].first = static_cast<TAirport>(i);
-      base_[i].second = 0u;
-    }
+    base_.fill(0);
   }
   // конструктор от диапазона элементов типа TAirport
   template <typename TIterator>
   AirportCounter(TIterator begin, TIterator end) : AirportCounter() {
     for (; begin != end; ++begin) {
-      base_.at(static_cast<size_t>(*begin)).first = *begin;
-      ++base_.at(static_cast<size_t>(*begin)).second;
+      ++base_[static_cast<size_t>(*begin)];
     }
   }
 
   // получить количество элементов, равных данному
   size_t Get(TAirport airport) const {
-    return base_[static_cast<size_t>(airport)].second;
+    return base_[static_cast<size_t>(airport)];
   }
 
   // добавить данный элемент
   void Insert(TAirport airport) {
-    ++base_[static_cast<int>(airport)].second;
+    ++base_[static_cast<int>(airport)];
   }
 
   // удалить одно вхождение данного элемента
   void EraseOne(TAirport airport) {
-    --base_[static_cast<int>(airport)].second;
+    --base_[static_cast<int>(airport)];
   }
 
   // удалить все вхождения данного элемента
   void EraseAll(TAirport airport) {
-    base_[static_cast<int>(airport)].second = 0u;
+    base_[static_cast<int>(airport)] = 0u;
   }
 
   using Item = pair<TAirport, size_t>;
   using Items = array<Item, static_cast<size_t>(TAirport::Last_)>;
+  using Items_air = array<size_t, static_cast<size_t>(TAirport::Last_)>;
 
   // получить некоторый объект, по которому можно проитерироваться,
   // получив набор объектов типа Item - пар (аэропорт, количество),
   // упорядоченных по аэропорту
   Items GetItems() const {
-      return base_;
+    // аэропорт-количество
+    Items a;
+    for (size_t i = 0; i < base_.size(); ++i) {
+      a[i].first = static_cast<TAirport>(i);
+      a[i].second = base_[i];
+    }
+    return a;
   }
 
 private:
-  // ???
-  Items base_;
+  // храним количесво аэропортов, привязанные к типу
+  // иными словами переписали Items упрощенным способом
+  // где номер позиции в array это Тип TAirport, а кзначение количество
+  Items_air base_;
 }; 
 
 void TestMoscow() {
@@ -144,7 +148,7 @@ void TestManyConstructions() {
   for (auto& x : airports) {
     x = static_cast<SmallCountryAirports>(gen_airport(rnd));
   }
-
+  
   uint64_t total = 0;
   for (int step = 0; step < 100'000'000; ++step) {
     AirportCounter<SmallCountryAirports> counter(begin(airports), end(airports));
