@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -21,14 +22,31 @@ template <typename String>
 using Char = typename String::value_type;
 
 template <typename String>
+using Key = String;
+
+//Напишем функцию в которой будем хранить ключи слов
+template <typename String>
+Key<String> getKey(const String& strings) {
+    String string = strings;
+    sort(begin(string), end(string));
+    string.erase(unique(begin(string), end(string)), end(string));
+    return string;
+}
+
+
+template <typename String>
 vector<Group<String>> GroupHeavyStrings(vector<String> strings) {
   // Напишите реализацию функции,
   // использовав не более 1 копирования каждого символа
-    for (auto& it : strings) {
-        sort(begin(it), end(it));
-        it.erase(unique(it.begin(), it.end()), it.end());
+    map<Key<String>, Group<String>> keys;
+    for (String& string : strings) {
+        keys[getKey(string)].push_back(move(string));
     }
-    return { {"abc"},{"cde"} };
+    vector<Group<String>> groups;
+    for (auto& [key, group] : keys) {
+        groups.push_back(move(group));
+    }
+    return groups;
 }
 
 
@@ -40,7 +58,7 @@ void TestGroupingABC() {
   ASSERT_EQUAL(groups[0], vector<string>({"caab", "abc", "bacc"}));
   ASSERT_EQUAL(groups[1], vector<string>({"cccc", "c"}));
 }
-/*
+
 void TestGroupingReal() {
   vector<string> strings = {"law", "port", "top", "laptop", "pot", "paloalto", "wall", "awl"};
   auto groups = GroupHeavyStrings(strings);
@@ -51,10 +69,10 @@ void TestGroupingReal() {
   ASSERT_EQUAL(groups[2], vector<string>({"port"}));
   ASSERT_EQUAL(groups[3], vector<string>({"top", "pot"}));
 }
-*/
+
 int main() {
   TestRunner tr;
   RUN_TEST(tr, TestGroupingABC);
-  //RUN_TEST(tr, TestGroupingReal);
+  RUN_TEST(tr, TestGroupingReal);
   return 0;
 }
