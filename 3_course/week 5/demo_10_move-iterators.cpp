@@ -8,11 +8,11 @@
 
 using namespace std;
 
-// РћР±СЉСЏРІР»СЏРµРј Sentence<Token> РґР»СЏ РїСЂРѕРёР·РІРѕР»СЊРЅРѕРіРѕ С‚РёРїР° Token
-// СЃРёРЅРѕРЅРёРјРѕРј vector<Token>.
-// Р‘Р»Р°РіРѕРґР°СЂСЏ СЌС‚РѕРјСѓ РІ РєР°С‡РµСЃС‚РІРµ РІРѕР·РІСЂР°С‰Р°РµРјРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ
-// С„СѓРЅРєС†РёРё РјРѕР¶РЅРѕ СѓРєР°Р·Р°С‚СЊ РЅРµ РјР°Р»РѕРїРѕРЅСЏС‚РЅС‹Р№ РІРµРєС‚РѕСЂ РІРµРєС‚РѕСЂРѕРІ,
-// Р° РІРµРєС‚РѕСЂ РїСЂРµРґР»РѕР¶РµРЅРёР№ вЂ” vector<Sentence<Token>>.
+// Объявляем Sentence<Token> для произвольного типа Token
+// синонимом vector<Token>.
+// Благодаря этому в качестве возвращаемого значения
+// функции можно указать не малопонятный вектор векторов,
+// а вектор предложений — vector<Sentence<Token>>.
 template <typename Token>
 using Sentence = vector<Token>;
 
@@ -29,7 +29,7 @@ TokenForwardIt FindSentenceEnd(TokenForwardIt tokens_begin, TokenForwardIt token
         : next(before_sentence_end);
 }
 
-// РљР»Р°СЃСЃ Token РёРјРµРµС‚ РјРµС‚РѕРґ bool IsEndSentencePunctuation() const
+// Класс Token имеет метод bool IsEndSentencePunctuation() const
 template <typename Token>
 vector<Sentence<Token>> SplitIntoSentences(vector<Token> tokens) {
     vector<Sentence<Token>> sentences;
@@ -37,11 +37,19 @@ vector<Sentence<Token>> SplitIntoSentences(vector<Token> tokens) {
     const auto tokens_end = end(tokens);
     while (tokens_begin != tokens_end) {
         const auto sentence_end = FindSentenceEnd(tokens_begin, tokens_end);
+        /*
         Sentence<Token> sentence;
         for (; tokens_begin != sentence_end; ++tokens_begin) {
             sentence.push_back(move(*tokens_begin));
         }
         sentences.push_back(move(sentence));
+        */
+        //воспользуемся make_move_iterator
+        sentences.push_back(Sentence<Token>(
+            make_move_iterator(tokens_begin),
+            make_move_iterator(sentence_end)
+        ));
+        tokens_begin = sentence_end;
     }
     return sentences;
 }
@@ -62,9 +70,9 @@ ostream& operator<<(ostream& stream, const TestToken& token) {
   return stream << token.data;
 }
 
-// РўРµСЃС‚ СЃРѕРґРµСЂР¶РёС‚ РєРѕРїРёСЂРѕРІР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ РєР»Р°СЃСЃР° TestToken.
-// Р”Р»СЏ РїСЂРѕРІРµСЂРєРё РѕС‚СЃСѓС‚СЃС‚РІРёСЏ РєРѕРїРёСЂРѕРІР°РЅРёР№ РІ С„СѓРЅРєС†РёРё SplitIntoSentences
-// РЅРµРѕР±С…РѕРґРёРјРѕ РЅР°РїРёСЃР°С‚СЊ РѕС‚РґРµР»СЊРЅС‹Р№ С‚РµСЃС‚.
+// Тест содержит копирования объектов класса TestToken.
+// Для проверки отсутствия копирований в функции SplitIntoSentences
+// необходимо написать отдельный тест.
 void TestSplitting() {
   ASSERT_EQUAL(
     SplitIntoSentences(vector<TestToken>({{"Split"}, {"into"}, {"sentences"}, {"!"}})),
